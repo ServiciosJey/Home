@@ -559,5 +559,101 @@ Detalle: ${detalle || '—'}.`;
     window.open(url, '_blank', 'noopener');
   });
 </script>
+  <script>
+// ===== Utilidades seguras para localStorage =====
+const LS = {
+  get(key, fallback = null){
+    try{
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    }catch(e){ return fallback; }
+  },
+  set(key, value){
+    try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+  },
+  del(key){
+    try{ localStorage.removeItem(key); }catch(e){}
+  }
+};
+
+// ===== 1) Persistir formulario de cotización =====
+const FORM_KEY = 'sj_quote_form_v1';
+const formEl = document.getElementById('quoteForm');
+
+function loadFormState(){
+  const data = LS.get(FORM_KEY, {});
+  if(!formEl) return;
+  if(data.nombre)   formEl.elements['nombre'].value   = data.nombre;
+  if(data.telefono) formEl.elements['telefono'].value = data.telefono;
+  if(data.servicio) formEl.elements['servicio'].value = data.servicio;
+  if(data.detalle)  formEl.elements['detalle'].value  = data.detalle;
+}
+
+function saveFormState(){
+  if(!formEl) return;
+  const payload = {
+    nombre:   formEl.elements['nombre'].value.trim(),
+    telefono: formEl.elements['telefono'].value.trim(),
+    servicio: formEl.elements['servicio'].value,
+    detalle:  formEl.elements['detalle'].value.trim()
+  };
+  LS.set(FORM_KEY, payload);
+}
+
+// Restaurar al cargar
+document.addEventListener('DOMContentLoaded', loadFormState);
+
+// Guardar cuando el usuario escribe/cambia algo
+['input','change'].forEach(evt =>
+  formEl?.addEventListener(evt, saveFormState)
+);
+
+// Si envía por WhatsApp, opcionalmente limpiamos el borrador
+formEl?.addEventListener('submit', () => {
+  // Si prefieres NO borrar, comenta la línea de abajo:
+  // LS.del(FORM_KEY);
+});
+
+// ===== 2) Recordar el último servicio clicado en las tarjetas =====
+const LAST_SERVICE_KEY = 'sj_last_service';
+const waButtons = document.querySelectorAll('.wa-service');
+
+// Guardar al hacer clic en “WhatsApp” de cada tarjeta
+waButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const s = btn.dataset.service || '';
+    if(s) LS.set(LAST_SERVICE_KEY, s);
+  });
+});
+
+// Al cargar, si no hay servicio elegido en el select, preseleccionar el último
+document.addEventListener('DOMContentLoaded', ()=>{
+  const last = LS.get(LAST_SERVICE_KEY, '');
+  const select = formEl?.elements['servicio'];
+  if(select && !select.value && last){
+    // Buscar una opción que contenga el texto del último servicio
+    const match = Array.from(select.options).find(o => last.toLowerCase().includes(o.text.toLowerCase()));
+    if(match) select.value = match.value;
+  }
+});
+
+// ===== 3) (Opcional) Restaurar posición de scroll =====
+const SCROLL_KEY = 'sj_scroll_y';
+window.addEventListener('beforeunload', ()=>{
+  LS.set(SCROLL_KEY, { y: window.scrollY });
+});
+document.addEventListener('DOMContentLoaded', ()=>{
+  const pos = LS.get(SCROLL_KEY, null);
+  if(pos && typeof pos.y === 'number'){
+    window.scrollTo({ top: pos.y, behavior: 'instant' });
+  }
+});
+
+// ===== (Opcional) Sincronizar entre pestañas =====
+window.addEventListener('storage', (e)=>{
+  if(e.key === FORM_KEY) loadFormState();
+});
+</script>
+
 </body>
 </html>
