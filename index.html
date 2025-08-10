@@ -50,7 +50,7 @@
     width:85px; height:50px; border-radius:5px; background:#fff;
     display:grid; place-items:center; border:1px solid var(--line);
   }
-  .logo svg{width:22px;height:22px}
+  .logo img{width:auto;height:100%;object-fit:contain;padding:4px}
   nav ul{display:flex; gap:18px; list-style:none; padding:0;margin:0;font-weight:600}
   .cta{
     display:inline-flex; align-items:center; gap:10px; font-weight:700;
@@ -80,9 +80,10 @@
   .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:12px; background:#0e0e0e; color:#fff; font-weight:700; cursor:pointer}
   .btn.primary{background:#fff; color:#000}
   .btn.whatsapp{border-color:#25D366aa}
+  .btn.small{padding:8px 12px; font-size:14px}
   .btn svg{width:18px;height:18px}
 
-  /* Services */
+  /* Sections & cards */
   section{padding:56px 0; border-top:1px solid var(--line)}
   .section-head{display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:20px}
   .section-head h2{margin:0;font-size: clamp(22px, 4vw, 34px)}
@@ -97,6 +98,7 @@
   .card .icon{width:46px; height:46px; border-radius:10px; border:1px solid var(--line); display:grid; place-items:center}
   .tag{font-size:12px; color:#000; background:#bfbfbf; border-radius:999px; padding:4px 8px; font-weight:700; justify-self:start}
   .card p{color:var(--muted); margin:0}
+  .card-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
 
   /* Steps */
   .steps{display:grid; grid-template-columns: repeat(4, 1fr); gap:16px}
@@ -143,7 +145,7 @@
     .grid{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr)}
     .benefits{grid-template-columns:repeat(2,1fr)}
-    .testi{grid-template-columns:repeat(2,1fr)}
+    .testi{grid-template-columns:repeat(2,1,1fr)}
     .contact-wrap{grid-template-columns:1fr}
     .cols{grid-template-columns:1fr 1fr}
   }
@@ -182,13 +184,14 @@
   <div class="container nav">
     <a href="#home" class="brand">
       <div class="logo" aria-hidden="true">
-  <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
-</div>
+        <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
+      </div>
     </a>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">Menú ▾</button>
     <nav>
       <ul>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#internos">Servicios internos</a></li>
         <li><a href="#pasos">Cómo funciona</a></li>
         <li><a href="#beneficios">Beneficios</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -227,6 +230,7 @@
     </div>
   </section>
 
+  <!-- SERVICIOS EXTERNOS -->
   <section id="servicios">
     <div class="container">
       <div class="section-head">
@@ -234,42 +238,126 @@
         <p>Selecciona lo que necesitas. Si no lo ves, pregúntanos.</p>
       </div>
       <div class="grid" id="servicesGrid">
-        <!-- Cards -->
+        <!-- Electricidad -->
         <article class="card">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M11 21h-1v-1H8v1H7v-1H5v1H4v-1H3v-1h18v1h-1v1h-1v-1h-2v1h-1v-1h-2v1h-1v-1h-2v1Zm9-4H4V4h16v13ZM6 6v9h12V6H6Z"/></svg></div>
           <strong>Electricidad</strong>
           <span class="tag">Instalación y reparación</span>
           <p>Breakers, tomas, luminarias, cortos, acometidas.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Electricidad (instalación y reparación)">WhatsApp</a>
+          </div>
         </article>
+
+        <!-- Plomería -->
         <article class="card">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M7 2h10v2H7V2Zm-3 5h16l2 6-2 6H4L2 13l2-6Zm3 2-1 4 1 4h10l1-4-1-4H7Z"/></svg></div>
           <strong>Plomería</strong>
           <span class="tag">Fugas y desagües</span>
           <p>Instalación de sanitarios, tuberías, bombas y tinacos.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Plomería (fugas, desagües e instalación)">WhatsApp</a>
+          </div>
         </article>
+
+        <!-- Refrigeración -->
         <article class="card">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M6 3h12v2H6V3ZM4 7h16v2H4V7Zm2 4h12v2H6v-2Zm-2 4h16v2H4v-2Z"/></svg></div>
           <strong>Refrigeración</strong>
           <span class="tag">Aire acondicionado</span>
           <p>Instalación, mantenimiento y recarga.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Refrigeración (A/C: instalación, mantenimiento y recarga)">WhatsApp</a>
+          </div>
         </article>
+
+        <!-- Celulares -->
         <article class="card">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M16 2H8C6.9 2 6 2.9 6 4v16l6-3 6 3V4c0-1.1-.9-2-2-2z"/></svg></div>
           <strong>Celulares</strong>
           <span class="tag">Venta y reparación</span>
           <p>Diagnóstico, cambio de pantalla y baterías.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Servicio de celulares (venta y reparación)">WhatsApp</a>
+          </div>
         </article>
+
+        <!-- Computadoras -->
         <article class="card">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M4 5h16v12H4zM2 19h20v2H2z"/></svg></div>
           <strong>Computadoras</strong>
           <span class="tag">Soporte técnico</span>
           <p>Formateo, recuperación de datos e instalaciones.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Computadoras (soporte técnico y recuperación de datos)">WhatsApp</a>
+          </div>
         </article>
+
+        <!-- Otros -->
         <article class="card">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2Zm4 0h14v-2H7v2Z"/></svg></div>
           <strong>Otros</strong>
           <span class="tag">Búsqueda especial</span>
           <p>Cuéntanos qué necesitas y lo conseguimos.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Otro servicio (búsqueda especial)">WhatsApp</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS INTERNOS -->
+  <section id="internos">
+    <div class="container">
+      <div class="section-head">
+        <h2>Servicios internos</h2>
+        <p>Soluciones hechas por nuestro equipo para tu negocio.</p>
+      </div>
+
+      <div class="grid">
+        <!-- Manejo de redes sociales -->
+        <article class="card">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M4 4h16v12H5.17L4 17.17V4Zm2 2v8h12V6H6Zm-2 14h16v2H4v-2Z"/></svg></div>
+          <strong>Manejo de redes sociales</strong>
+          <span class="tag">Plan + contenido + gestión</span>
+          <p>Calendario, diseño de piezas, copies y atención básica de mensajes.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Manejo de redes sociales (plan, contenido y gestión)">WhatsApp</a>
+          </div>
+        </article>
+
+        <!-- Creación de campañas -->
+        <article class="card">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M3 4h2l3 7h8l3-7h2l-3 7h3v2h-4l-2 5H8l-2-5H2v-2h3L3 4Zm7 9-1.2 3h6.4l1.2-3h-6.4Z"/></svg></div>
+          <strong>Creación de campañas publicitarias</strong>
+          <span class="tag">Meta, Google y más</span>
+          <p>Definición de objetivo, segmentación, piezas y configuración técnica.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Creación de campañas publicitarias (Meta/Google)">WhatsApp</a>
+          </div>
+        </article>
+
+        <!-- Menú, catálogo y web -->
+        <article class="card">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M4 3h10v2H4V3Zm0 4h16v2H4V7Zm0 4h16v2H4v-2Zm0 4h10v2H4v-2Z"/></svg></div>
+          <strong>Creación de menú digital, catálogo y página web</strong>
+          <span class="tag">Listo para vender</span>
+          <p>Diseño, carga de productos/servicios y conexión a WhatsApp.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Creación de menú digital, catálogo y página web">WhatsApp</a>
+          </div>
+        </article>
+
+        <!-- Impresos personalizados -->
+        <article class="card">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M6 2h12v4H6V2ZM4 8h16v10H4V8Zm2 12h12v2H6v-2Z"/></svg></div>
+          <strong>Impresos personalizados</strong>
+          <span class="tag">Tarjetas, letreros, camisas y más</span>
+          <p>Diseño + producción. Entregas coordinadas y facturación.</p>
+          <div class="card-actions">
+            <a class="btn small whatsapp wa-service" data-service="Impresos personalizados (tarjetas, letreros, camisas y más)">WhatsApp</a>
+          </div>
         </article>
       </div>
     </div>
@@ -355,17 +443,23 @@
           <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
           <select name="servicio">
             <option value="" selected>Selecciona un servicio</option>
+            <!-- Externos -->
             <option>Electricidad</option>
             <option>Plomería</option>
             <option>Refrigeración</option>
             <option>Celulares</option>
             <option>Computadoras</option>
             <option>Otro</option>
+            <!-- Internos -->
+            <option>Manejo de redes sociales</option>
+            <option>Creación de campañas publicitarias</option>
+            <option>Creación de menú digital, catálogo y página web</option>
+            <option>Impresos personalizados</option>
           </select>
           <textarea name="detalle" rows="5" placeholder="Cuéntanos qué necesitas (lugar, horario, detalle)"></textarea>
           <div class="helper">Al enviar, se abrirá WhatsApp con tu solicitud prellenada.</div>
           <button class="btn primary" type="submit">Enviar por WhatsApp</button>
-          <a class="btn" href="mailto:serviciosjey@example.com?subject=Cotizaci%C3%B3n%20Servicios%20Jey">Enviar por correo</a>
+          <a class="btn" href="mailto:serviciosjey@gmail.com?subject=Cotizaci%C3%B3n%20Servicios%20Jey">Enviar por correo</a>
         </form>
         <aside class="card">
           <strong>Datos</strong>
@@ -384,9 +478,8 @@
     <div>
       <div class="brand" style="margin-bottom:8px">
         <div class="logo" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 100 20 10 10 0 000-20Zm-1 5h2v6h-2V7Zm1 10.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5Z"/></svg>
+          <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
         </div>
-        <div>Servicios Jey</div>
       </div>
       <div>Conectamos personas con <b>técnicos verificados</b> y gestionamos todo el proceso para que no tengas que preocuparte.</div>
     </div>
@@ -394,6 +487,7 @@
       <strong>Secciones</strong>
       <ul style="list-style:none; padding:0; margin:10px 0 0; color:var(--muted)">
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#internos">Servicios internos</a></li>
         <li><a href="#pasos">Cómo funciona</a></li>
         <li><a href="#beneficios">Beneficios</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -435,6 +529,17 @@
     });
   });
 
+  // Botones de WhatsApp por servicio (cards)
+  const waNumber = '18094862675';
+  document.querySelectorAll('.wa-service').forEach(btn=>{
+    const service = btn.dataset.service || 'servicio';
+    const msg = `Hola Servicios Jey, vengo de la web y quiero cotizar: ${service}.`;
+    btn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.setAttribute('aria-label', `Cotizar ${service} por WhatsApp`);
+  });
+
   // Form to WhatsApp
   const form = document.getElementById('quoteForm');
   form.addEventListener('submit', e=>{
@@ -450,7 +555,7 @@ Servicio: ${servicio || 'No especificado'}.
 Teléfono: ${telefono || 'No indicado'}.
 Detalle: ${detalle || '—'}.`;
 
-    const url = 'https://wa.me/18094862675?text=' + encodeURIComponent(msg);
+    const url = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank', 'noopener');
   });
 </script>
